@@ -1,0 +1,35 @@
+{
+  "name": "talon-crash-backend",
+  "version": "3.0.0",
+  "description": "Hyper-scaled crash game backend for 400K concurrent players",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "migrate": "node -e \"require('./lib/db.js').migrate()\"",
+    "test": "jest",
+    "cluster": "node cluster.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ws": "^8.18.0",
+    "ioredis": "^5.4.1",
+    "pg": "^8.12.0",
+    "dotenv": "^16.4.5",
+    "uuid": "^10.0.0",
+    "crypto-js": "^4.2.0",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "compression": "^1.7.4",
+    "rate-limiter-flexible": "^5.0.3",
+    "pino": "^9.3.2",
+    "pino-pretty": "^11.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "jest": "^29.7.0"
+  }
+}
