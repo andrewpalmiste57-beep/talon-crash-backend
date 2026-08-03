@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: talon
+      POSTGRES_PASSWORD: talon_secure_2026
+      POSTGRES_DB: talon_production
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U talon -d talon_production"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  talon:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ecto://talon:talon_secure_2026@db/talon_production
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      PHX_HOST: localhost
+      PORT: 4000
+      MIX_ENV: prod
+    ports:
+      - "4000:4000"
+    command: ["bin/talon", "start"]
+
+volumes:
+  pgdata:
