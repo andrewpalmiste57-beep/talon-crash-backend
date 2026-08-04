@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: talon-backend
+https://www.github.com/andrewpalmistea57-beep
     runtime: docker
     repo: https://github.com/your-org/talon
     branch: main
